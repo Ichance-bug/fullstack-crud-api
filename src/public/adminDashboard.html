@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="adminDashboard.html">Admin Dashboard</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="employees.html">Employees</a></li>
+          <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
+          <li class="nav-item"><a class="nav-link" href="AllRequestAdmin.html">Requests</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" id="logout-btn">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-4">
+    <h2>Welcome, <span id="admin-name"></span></h2>
+    <div class="row mt-4">
+      <div class="col-md-3">
+        <div class="card text-white bg-danger mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Employees</h5>
+            <p class="card-text">Manage employee records.</p>
+            <a href="employees.html" class="btn btn-light btn-sm">Go</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Departments</h5>
+            <p class="card-text">View all departments.</p>
+            <a href="departments.html" class="btn btn-light btn-sm">Go</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-white bg-info mb-3">
+          <div class="card-body">
+            <h5 class="card-title">All Requests</h5>
+            <p class="card-text">Review all user requests.</p>
+            <a href="AllRequestAdmin.html" class="btn btn-light btn-sm">Go</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const user = JSON.parse(sessionStorage.getItem('auth_user') || 'null');
+    if (!user) { window.location.href = 'login.html'; }
+    else if (user.role !== 'admin') { window.location.href = 'userDashboard.html'; }
+    else { document.getElementById('admin-name').textContent = `${user.firstName} ${user.lastName}`; }
+
+    document.getElementById('logout-btn').addEventListener('click', function (e) {
+      e.preventDefault();
+      sessionStorage.clear();
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
