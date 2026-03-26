@@ -17,6 +17,7 @@ const PORT = 3000;
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (_req, res) => res.redirect('/home.html'));
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.use('/api',              authRoutes);
